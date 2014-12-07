@@ -50,16 +50,16 @@ class TweetsController < ApplicationController
     id_e=0
     i=" "
     tipo="otros"
-    servicio="hogar"
+    servicio="incierto"
     cadena=db.execute("select tipo,termino from filtros")
     palabra=texto.split(" ")
     ctd=0
+    id_f=1
     palabra.each do |i|
       while ctd<cadena.count
         if (i==cadena[ctd][1])
           tipo=cadena[ctd][0]
           id_f=db.execute("select id from filtros where termino=(?)",cadena[ctd][0])
-          db.execute("insert into tweet_filtros('Tweet_id','Filtro_id','created_at','updated_at') values(?,?,?,?)",id,id_f,d,d)
           break
         end
         ctd+=1
@@ -70,7 +70,11 @@ class TweetsController < ApplicationController
       if (i=="celular")
         servicio="celular"
       end
+      if (i=="telefono")
+        servicio="hogar"
+      end
     end
+    db.execute("insert into tweet_filtros('Tweet_id','Filtro_id','created_at','updated_at') values(?,?,?,?)",id,id_f,d,d)
     palabra.each do |i|
       if (i.start_with?("@e"))
         id_e=db.execute("select id from companias where companias.twi='entel_ayuda' limit 1")
