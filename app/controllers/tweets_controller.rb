@@ -6,6 +6,8 @@ class TweetsController < ApplicationController
     id=db.execute("select id from tweets order by id desc limit 1;")
     palabra=texto.split(" ")
     cadena=db.execute("select Terminos from diccionarios")
+    cadena=cadena.to_s.tr("[],/""","")
+    cadena=cadena.split
     ctd=0
         id_f=1
     palabra.each do |i|
@@ -51,15 +53,17 @@ class TweetsController < ApplicationController
     i=" "
     tipo="otros"
     servicio="incierto"
-    cadena=db.execute("select tipo,termino from filtros")
+    cadena=db.execute("select termino from filtros")
+    cadena=cadena.to_s.tr("[],/""","")
+    cadena=cadena.split
     palabra=texto.split(" ")
     ctd=0
     id_f=1
     palabra.each do |i|
       while ctd<cadena.count
-        if (i==cadena[ctd][1])
-          tipo=cadena[ctd][0]
-          id_f=db.execute("select id from filtros where termino=(?)",cadena[ctd][0])
+        if (i==cadena[ctd])
+          tipo=db.execute("select tipo from filtros where termino=(?)",cadena[ctd])
+          id_f=db.execute("select id from filtros where termino=(?)",cadena[ctd])
           break
         end
         ctd+=1
@@ -77,13 +81,13 @@ class TweetsController < ApplicationController
     db.execute("insert into tweet_filtros('Tweet_id','Filtro_id','created_at','updated_at') values(?,?,?,?)",id,id_f,d,d)
     palabra.each do |i|
       if (i.start_with?("@e"))
-        id_e=db.execute("select id from companias where companias.twi='entel_ayuda' limit 1")
+        id_e=db.execute("select id from compania where compania.twi='entel_ayuda' limit 1")
       end
       if (i.start_with?("@C"))
-        id_e=db.execute("select id from companias where companias.twi='ClaroTeAyuda' limit 1")
+        id_e=db.execute("select id from compania where compania.twi='ClaroTeAyuda' limit 1")
       end
       if (i.start_with?("@A"))
-        id_e=db.execute("select id from companias where companias.twi='AyudaMovistarCL' limit 1")
+        id_e=db.execute("select id from compania where compania.twi='AyudaMovistarCL' limit 1")
       end
     end
     db.execute("insert into reclamos (tweet_id,compania_id,tipo,servicio,'created_at','updated_at') values(?,?,?,?,?,?)",id,id_e,tipo,servicio,d,d)

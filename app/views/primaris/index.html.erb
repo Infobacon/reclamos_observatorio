@@ -23,45 +23,9 @@
 
 </body>
 
-<head>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>SB Admin 2 - Bootstrap Admin Theme</title>
-
-  <!-- Bootstrap Core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- MetisMenu CSS -->
-  <link href="css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
-
-  <!-- Timeline CSS -->
-  <link href="css/plugins/timeline.css" rel="stylesheet">
-
-  <!-- Custom CSS -->
-  <link href="css/sb-admin-2.css" rel="stylesheet">
-
-  <!-- Morris Charts CSS -->
-  <link href="css/plugins/morris.css" rel="stylesheet">
-
-  <!-- Custom Fonts -->
-  <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
-
-</head>
 
 <body>
-
 <div id="wrapper">
 
   <!-- Navigation -->
@@ -83,88 +47,92 @@
           <div class="panel-body">
             <ul class="timeline">
               <li>
-                <div class="timeline-badge"><i class="fa fa-check"></i>
+                <div class="timeline-badge"><i class="fa fa-bomb"></i>
                 </div>
                 <div class="timeline-panel">
                   <div class="timeline-heading">
-                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                    <h4 class="timeline-title">Peor Compañia</h4>
                   </div>
+                  <% @dat1.each do |element| %>
                   <div class="timeline-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero laboriosam dolor perspiciatis omnis exercitationem. Beatae, officia pariatur? Est cum veniam excepturi. Maiores praesentium, porro voluptas suscipit facere rem dicta, debitis.</p>
+                    <p>La compañia con mayor cantidad de reclamos corresponde a:   <%= element %>
+                    </p>
                   </div>
+                  <% end%>
                 </div>
               </li>
               <li class="timeline-inverted">
-                <div class="timeline-badge warning"><i class="fa fa-credit-card"></i>
+                <div class="timeline-badge warning"><i class="fa fa-check"></i>
                 </div>
                 <div class="timeline-panel">
                   <div class="timeline-heading">
-                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                    <h4 class="timeline-title">Mejor compañia</h4>
                   </div>
+                  <% @dat2.each do |element| %>
                   <div class="timeline-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem dolorem quibusdam, tenetur commodi provident cumque magni voluptatem libero, quis rerum. Fugiat esse debitis optio, tempore. Animi officiis alias, officia repellendus.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium maiores odit qui est tempora eos, nostrum provident explicabo dignissimos debitis vel! Adipisci eius voluptates, ad aut recusandae minus eaque facere.</p>
+                    <p>La mejor compañia, es decir, la que tiene menos reclamos correponde a:    <%= element %></p>
                   </div>
+                  <% end%>
                 </div>
               </li>
               <li>
-                <div class="timeline-badge danger"><i class="fa fa-bomb"></i>
+                <div class="timeline-badge danger"><i class="fa fa-bug"></i>
                 </div>
                 <div class="timeline-panel">
                   <div class="timeline-heading">
-                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                    <h4 class="timeline-title">Boleta o servicio?</h4>
                   </div>
+                  <% @dat3.each do |element| %>
                   <div class="timeline-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus numquam facilis enim eaque, tenetur nam id qui vel velit similique nihil iure molestias aliquam, voluptatem totam quaerat, magni commodi quisquam.</p>
+                    <p>El tipo de reclamo mas frecuente es:        <%= element %></p>
                   </div>
+                  <% end%>
                 </div>
               </li>
               <li class="timeline-inverted">
+                <div class="timeline-badge danger"><i class="fa fa-bullhorn"></i>
+                </div>
                 <div class="timeline-panel">
                   <div class="timeline-heading">
-                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                    <h4 class="timeline-title">Celular o fijo?</h4>
                   </div>
+                  <% @dat4.each do |element| %>
                   <div class="timeline-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates est quaerat asperiores sapiente, eligendi, nihil. Itaque quos, alias sapiente rerum quas odit! Aperiam officiis quidem delectus libero, omnis ut debitis!</p>
+                    <p>El servicio peor evaluado, o con mas reclamos es:         <%= element %></p>
                   </div>
+                  <% end%>
                 </div>
               </li>
               <li>
-                <div class="timeline-badge info"><i class="fa fa-save"></i>
+                <div class="timeline-badge info"><i class="fa fa-fire"></i>
                 </div>
                 <div class="timeline-panel">
                   <div class="timeline-heading">
-                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                    <h4 class="timeline-title">Much reclamos, wow</h4>
                   </div>
+                  <% @dat5.each do |element| %>
                   <div class="timeline-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis minus modi quam ipsum alias at est molestiae excepturi delectus nesciunt, quibusdam debitis amet, beatae consequuntur impedit nulla qui! Laborum, atque.</p>
+                    <p>El usuario con mas reclamos es: <%= element %></p>
                     <hr>
-
                   </div>
+                  <% end%>
                 </div>
               </li>
               <li>
                 <div class="timeline-panel">
                   <div class="timeline-heading">
-                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                    <div class="timeline-badge danger"><i class="fa fa-book"></i>
+                    </div>
+                    <h4 class="timeline-title">Diccionario</h4>
                   </div>
+                  <% @dat6.each do |element| %>
                   <div class="timeline-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi fuga odio quibusdam. Iure expedita, incidunt unde quis nam! Quod, quisquam. Officia quam qui adipisci quas consequuntur nostrum sequi. Consequuntur, commodi.</p>
+                    <p>Termino mas usado a la hora de filtrar tweets: <%= element %></p>
                   </div>
+                  <% end%>
                 </div>
               </li>
-              <li class="timeline-inverted">
-                <div class="timeline-badge success"><i class="fa fa-graduation-cap"></i>
-                </div>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
-                  </div>
-                  <div class="timeline-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt obcaecati, quaerat tempore officia voluptas debitis consectetur culpa amet, accusamus dolorum fugiat, animi dicta aperiam, enim incidunt quisquam maxime neque eaque.</p>
-                  </div>
-                </div>
-              </li>
+
             </ul>
           </div>
           <!-- /.panel-body -->
@@ -211,7 +179,7 @@
                                     </span>
                 <div class="chat-body clearfix">
                   <div class="header">
-                    <small class=" text-muted">
+                    <small class=" text-muted"></small>
                     <strong class="pull-right primary-font">Claro</strong>
                   </div>
                   <p>
@@ -229,7 +197,7 @@
                 <div class="chat-body clearfix">
                   <div class="header">
                     <strong class="primary-font">Entel</strong>
-                    <small class="pull-right text-muted">
+                    <small class="pull-right text-muted"></small>
                   </div>
                   <p>
                     La cantidad de reclamos que lleva a la fecha la compañia Entel es de:
@@ -255,23 +223,5 @@
 </div>
 <!-- /#wrapper -->
 
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-
-<!-- Metis Menu Plugin JavaScript -->
-<script src="js/plugins/metisMenu/metisMenu.min.js"></script>
-
-<!-- Morris Charts JavaScript -->
-<script src="js/plugins/morris/raphael.min.js"></script>
-<script src="js/plugins/morris/morris.min.js"></script>
-<script src="js/plugins/morris/morris-data.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="js/sb-admin-2.js"></script>
-
 </body>
-
 </html>
