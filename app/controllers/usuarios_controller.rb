@@ -54,6 +54,13 @@ class UsuariosController < ApplicationController
   # DELETE /usuarios/1
   # DELETE /usuarios/1.json
   def destroy
+    db = SQLite3::Database.open "./db/development.sqlite3"
+    id=@usuario.id
+    id_t=db.execute("select tweet_id from usuario_tweets where usuario_id=(?)",id)
+    id_t.each do |i|
+      db.execute("delete from tweets where id=(?)",i)
+      db.execute("delete from usuario_tweets where tweet_id=(?)",i)
+    end
     @usuario.destroy
     respond_to do |format|
       format.html { redirect_to usuarios_url, notice: 'Usuario was successfully destroyed.' }
