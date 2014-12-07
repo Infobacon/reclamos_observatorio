@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nombre_c: MyString
+  cuenta: 1
+  twi: MyString
+
+two:
+  nombre_c: MyString
+  cuenta: 1
+  twi: MyString

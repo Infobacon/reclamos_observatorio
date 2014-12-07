@@ -1,0 +1,52 @@
+<%= form_for @reclamo, :html => { :class => "form-horizontal reclamo" } do |f| %>
+
+    <% if @reclamo.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@reclamo.errors.count, "error") %> prohibited this reclamo from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @reclamo.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :Tweet_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Tweet_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@reclamo[:Tweet_id]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :Compania_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :Compania_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@reclamo[:Compania_id]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :tipo, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :tipo, :class => 'form-control' %>
+    </div>
+    <%= error_span(@reclamo[:tipo]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :servicio, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :servicio, :class => 'form-control' %>
+    </div>
+    <%= error_span(@reclamo[:servicio]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            reclamos_path, :class => 'btn btn-default' %>
+
+<% end %>

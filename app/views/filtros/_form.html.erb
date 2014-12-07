@@ -1,0 +1,38 @@
+<%= form_for @filtro, :html => { :class => "form-horizontal filtro" } do |f| %>
+
+    <% if @filtro.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@filtro.errors.count, "error") %> prohibited this filtro from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @filtro.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :tipo, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :tipo, :class => 'form-control' %>
+    </div>
+    <%= error_span(@filtro[:tipo]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :termino, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :termino, :class => 'form-control' %>
+    </div>
+    <%= error_span(@filtro[:termino]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            filtros_path, :class => 'btn btn-default' %>
+
+<% end %>

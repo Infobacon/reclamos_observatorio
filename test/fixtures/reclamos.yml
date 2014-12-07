@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Tweet_id: 
+  Compania_id: 
+  tipo: MyString
+  servicio: MyString
+
+two:
+  Tweet_id: 
+  Compania_id: 
+  tipo: MyString
+  servicio: MyString

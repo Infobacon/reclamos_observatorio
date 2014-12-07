@@ -1,0 +1,24 @@
+<%= form_for @primari, :html => { :class => "form-horizontal primari" } do |f| %>
+
+    <% if @primari.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@primari.errors.count, "error") %> prohibited this primari from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @primari.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            primaris_path, :class => 'btn btn-default' %>
+
+<% end %>

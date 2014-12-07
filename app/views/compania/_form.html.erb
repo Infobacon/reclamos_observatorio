@@ -1,0 +1,45 @@
+<%= form_for @companium, :html => { :class => "form-horizontal companium" } do |f| %>
+
+    <% if @companium.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@companium.errors.count, "error") %> prohibited this companium from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @companium.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :nombre_c, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :nombre_c, :class => 'form-control' %>
+    </div>
+    <%= error_span(@companium[:nombre_c]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :cuenta, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :cuenta, :class => 'form-control' %>
+    </div>
+    <%= error_span(@companium[:cuenta]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :twi, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :twi, :class => 'form-control' %>
+    </div>
+    <%= error_span(@companium[:twi]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            compania_path, :class => 'btn btn-default' %>
+
+<% end %>

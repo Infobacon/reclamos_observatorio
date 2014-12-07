@@ -1,0 +1,45 @@
+<%= form_for @usuario, :html => { :class => "form-horizontal usuario" } do |f| %>
+
+    <% if @usuario.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@usuario.errors.count, "error") %> prohibited this usuario from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @usuario.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :nick, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :nick, :class => 'form-control' %>
+    </div>
+    <%= error_span(@usuario[:nick]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :nombre_u, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :nombre_u, :class => 'form-control' %>
+    </div>
+    <%= error_span(@usuario[:nombre_u]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :id_t, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :id_t, :class => 'form-control' %>
+    </div>
+    <%= error_span(@usuario[:id_t]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            usuarios_path, :class => 'btn btn-default' %>
+
+<% end %>
