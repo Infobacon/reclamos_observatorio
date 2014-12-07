@@ -4,21 +4,19 @@ class TweetsController < ApplicationController
     d = Time.now.to_s
     db = SQLite3::Database.open "./db/development.sqlite3"
     id=db.execute("select id from tweets order by id desc limit 1;")
-    palabra=texto.split(" ")
-    cadena=db.execute("select Terminos from diccionarios")
-    cadena=cadena.to_s.tr("[],/""","")
+    cadena=db.execute("select terminos from diccionarios")
+    cadena=cadena.to_s.tr('"][', "")
     cadena=cadena.split
-    ctd=0
-        id_f=1
+    palabra=texto.split(" ")
+    id_f=1
     palabra.each do |i|
-          while(ctd<cadena.count)
-            if(i==cadena[ctd])
-              id_f=db.execute("select id from diccionarios where Terminos=(?) limit 1",i)
-              break
-            end
-            ctd+=1
-          end
-      ctd=0
+      i=i.to_s.tr('"][', "")
+      if(cadena.include?i)
+        id_f=db.execute("select id from diccionarios where Terminos=(?) limit 1",i)
+        id_f=id_f.to_s.tr(']["', "")
+        id_f=id_f.to_i
+        break
+      end
     end
     db.execute("insert into tweet_diccionarios('Tweet_id','Diccionario_id','created_at','updated_at') values(?,?,?,?)",id,id_f,d,d)
   end
@@ -50,25 +48,23 @@ class TweetsController < ApplicationController
     db = SQLite3::Database.open "./db/development.sqlite3"
     id=db.execute("select id from tweets order by id desc limit 1;")
     id_e=0
+    cadena=db.execute("select termino from filtros")
+    cadena=cadena.to_s.tr('"][', "")
+    cadena=cadena.split
     i=" "
     tipo="otros"
     servicio="incierto"
-    cadena=db.execute("select termino from filtros")
-    cadena=cadena.to_s.tr("[],/""","")
-    cadena=cadena.split
     palabra=texto.split(" ")
-    ctd=0
     id_f=1
     palabra.each do |i|
-      while ctd<cadena.count
-        if (i==cadena[ctd])
-          tipo=db.execute("select tipo from filtros where termino=(?)",cadena[ctd])
-          id_f=db.execute("select id from filtros where termino=(?)",cadena[ctd])
+      i=i.to_s.tr('"][', "")
+        if (cadena.include?i)
+          tipo=db.execute("select tipo from filtros where termino=(?)",i)
+          tipo=tipo.to_s.tr(']["', "")
+          puts i
+          id_f=db.execute("select id from filtros where termino=(?)",i)
           break
         end
-        ctd+=1
-      end
-      ctd=0
     end
     palabra.each do |i|
       if (i=="celular")
