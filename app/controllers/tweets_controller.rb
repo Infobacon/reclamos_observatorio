@@ -5,12 +5,13 @@ class TweetsController < ApplicationController
     db = SQLite3::Database.open "./db/development.sqlite3"
     id=db.execute("select id from tweets order by id desc limit 1;")
     cadena=db.execute("select terminos from diccionarios")
-    cadena=cadena.to_s.tr('"][', "")
+    cadena=cadena.to_s.tr('"][,', "")
     cadena=cadena.split
+    puts cadena
     palabra=texto.split(" ")
     id_f=1
     palabra.each do |i|
-      i=i.to_s.tr('"][', "")
+      i=i.to_s.tr('"][,!¡?¡', "")
       if(cadena.include?i)
         id_f=db.execute("select id from diccionarios where Terminos=(?) limit 1",i)
         id_f=id_f.to_s.tr(']["', "")
@@ -49,15 +50,16 @@ class TweetsController < ApplicationController
     id=db.execute("select id from tweets order by id desc limit 1;")
     id_e=0
     cadena=db.execute("select termino from filtros")
-    cadena=cadena.to_s.tr('"][', "")
+    cadena=cadena.to_s.tr('"][,', "")
     cadena=cadena.split
+    puts cadena
     i=" "
     tipo="otros"
-    servicio="incierto"
+    servicio="celular"
     palabra=texto.split(" ")
     id_f=1
     palabra.each do |i|
-      i=i.to_s.tr('"][', "")
+      i=i.to_s.tr('"][,!¡?¡', "")
         if (cadena.include?i)
           tipo=db.execute("select tipo from filtros where termino=(?)",i)
           tipo=tipo.to_s.tr(']["', "")
@@ -81,6 +83,9 @@ class TweetsController < ApplicationController
       end
       if (i.start_with?("@C"))
         id_e=db.execute("select id from compania where compania.twi='ClaroTeAyuda' limit 1")
+      end
+      if (i.start_with?("@M"))
+        id_e=db.execute("select id from compania where compania.twi='AyudaMovistarCL' limit 1")
       end
       if (i.start_with?("@A"))
         id_e=db.execute("select id from compania where compania.twi='AyudaMovistarCL' limit 1")
@@ -110,27 +115,21 @@ class TweetsController < ApplicationController
       config.access_token        = "777522674-swQ5cJqfqSnzf2CCJgDSWLaVkRpr5XogBmyKCQGJ"
       config.access_token_secret = "MQuAZO0kJ4JGxTNYQlsdLgRN02RYHChpMLOBQZt6aRMWv"
     end
-    #topics = ["entel_ayuda celular","AyudaMovistarCL celular", "ClaroTeAyuda celular",
-              #"entel_ayuda señal","AyudaMovistarCL señal", "ClaroTeAyuda señal",
-              #"entel_ayuda telefono","AyudaMovistarCL telefono", "ClaroTeAyuda telefono",
-              #"entel_ayuda problema","AyudaMovistarCL problema", "ClaroTeAyuda problema",
-              #"entel_ayuda iphone","AyudaMovistarCL iphone", "ClaroTeAyuda iphone",
-              #"entel_ayuda reclamo","AyudaMovistarCL reclamo", "ClaroTeAyuda reclamo",
-              #"entel_ayuda 3G","AyudaMovistarCL 3G", "ClaroTeAyuda 3G"]
     topics=db.execute("select terminos from diccionarios")
     contador = 0
-    #@tweets = []
     client.filter(:track => topics.join(",")) do |object|
       if contador >= 1
         break
       else
-        insert_tweet(object)
-        insert_usuario(object)
-        reclamo(object.text)
-        user_tweet(object)
-        dic_tweet(object.text)
-        #@tweets.push contador
-        #@tweets = object.text if object.is_a?(Twitter::Tweet)
+        if (object.text.start_with?("@"))
+          insert_tweet(object)
+          insert_usuario(object)
+          reclamo(object.text)
+          user_tweet(object)
+          dic_tweet(object.text)
+          #@tweets.push contador
+          #@tweets = object.text if object.is_a?(Twitter::Tweet)
+        end
       end
       contador += 1
     end
