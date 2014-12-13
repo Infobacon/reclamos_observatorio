@@ -118,7 +118,7 @@ class TweetsController < ApplicationController
     topics=db.execute("select terminos from diccionarios")
     contador = 0
     client.filter(:track => topics.join(",")) do |object|
-      if contador >= 100
+      if contador >= 10
         break
       else
         if (object.text.start_with?("@"))
