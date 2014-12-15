@@ -15,7 +15,7 @@ class PrimarisController < ApplicationController
     @dat1=test
     test=db.execute("Select nombre_c from compania order by cuenta asc limit 1")[0]
     @dat2=test
-    hola=db.execute("Select tipo,count(tipo) as cuenta from reclamos group by tipo order by cuenta asc limit 1")
+    hola=db.execute("Select tipo,count(tipo) as cuenta from reclamos where reclamos.tipo!='otros' group by tipo order by cuenta desc limit 1")
     hola=hola.to_s.tr("X-\\][", "")
     hola=hola.split(',')
     hola.pop
